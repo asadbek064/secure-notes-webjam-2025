@@ -28,7 +28,7 @@ WebJam is a secure, end-to-end encrypted (E2EE) web-based platform for managing 
 ## Getting Started
 
 ```bash
-git clone <repo-url>
+git clone git@github.com:asadbek064/secure-notes-webjam-2025.git
 cd secure-notes-webjam-2025
 pnpm i
 pnpm dev
