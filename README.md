@@ -5,7 +5,7 @@
 WebJam is a secure, end-to-end encrypted (E2EE) web-based platform for managing personal notes, to-do lists, and file uploads. Built with Next.js, TailwindCSS, ShadCN, Discord OAuth, and Supabase, it ensures complete data privacy by encrypting all user data client-side.
 
 ## Demo Live 
-[Link]()
+[Link](https://webdev-webjam-2025-secure-notes.vercel.app/login)
 
 ## WebDev Discord server WebJam 2025
 [Link](https://gist.github.com/CaseoJKL/1accfb999c00ba4cab2e264294019f3f)
