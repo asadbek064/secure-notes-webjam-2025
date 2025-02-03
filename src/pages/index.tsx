@@ -13,6 +13,7 @@ import { FileList } from "@/components/FilesList";
 import { NoteList } from "@/components/NoteList";
 import { KeySquare } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function Home() {
   const supabase = useSupabaseClient<Database>();
@@ -20,6 +21,9 @@ export default function Home() {
   const router = useRouter();
 
   const [encryptionKey, setEncryptionKey] = useState<string>("");
+  const [decryptionError, setDecryptionError] = useState(false);
+  const [decryptionErrorMessage, setDecryptionErrorMessage] = useState("");
+
   const [isDecrypting, setIsDecrypting] = useState(false);
   const [notes, setNotes] = useState<any[]>([]);
   const [todos, setTodos] = useState<any[]>([]);
@@ -194,13 +198,34 @@ export default function Home() {
 
       setFiles(filesResponse.data || []);
     } catch (error) {
-      console.error("Failed to decrypt data:", error);
-      sessionStorage.removeItem("encryption_key");
-      setEncryptionKey("");
+      console.log("Failed to decrypt data:", error);
+      setDecryptionErrorMessage("Failed to decrypt data. The encryption key may be incorrect.");
+      setDecryptionError(true);
+      return;
     } finally {
       setIsDecrypting(false);
     }
   };
+
+  const handleDismissError = () => {
+    setDecryptionError(false);
+    setDecryptionErrorMessage("");
+    sessionStorage.removeItem("encryption_key");
+    setEncryptionKey("");
+  };
+
+  if (decryptionError) {
+    return (
+      <div className="container mx-auto p-4">
+        <Alert variant="destructive" className="mb-4">
+          <AlertDescription>{decryptionErrorMessage}</AlertDescription>
+        </Alert>
+        <Button onClick={handleDismissError} className="w-full">
+          Return to Key Entry
+        </Button>
+      </div>
+    );
+  }
 
   if (!encryptionKey) {
     return (
