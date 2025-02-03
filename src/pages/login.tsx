@@ -13,7 +13,7 @@ export default function Login() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
         options: {
-          redirectTo: `${window.location.origin}`
+          redirectTo: process.env.NEXT_PUBLIC_SITE_URL + `api/auth/callback`
         }
       });
 
