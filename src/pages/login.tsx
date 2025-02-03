@@ -13,8 +13,7 @@ export default function Login() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
         options: {
-          redirectTo: process.env.NEXT_PUBLIC_SITE_URL || "https://webdev-webjam-2025-secure-notes.vercel.app/", 
-          scopes: 'identify email'
+          redirectTo: `${window.location.origin}`
         }
       });
 
